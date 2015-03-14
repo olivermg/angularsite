@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="owApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -58,6 +58,19 @@
     </div>
 
     <div class="container">
+      <div class="row" ng-controller="UserCtrl">
+         <div class="col-md-4">
+		 <label for="searchName">Name:</label>
+		 <input id="searchName" type="text" ng-model="searchName">
+		 {{ searchName }}
+         </div>
+         <div class="col-md-8">
+            <ul>
+		    <li ng-repeat="user in users | filter:searchName">{{ user.name }}</li>
+            </ul>
+         </div>
+      </div>
+
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
@@ -91,6 +104,8 @@
     <script src="pub/js/jquery.min.js"></script>
     <script src="pub/js/bootstrap.min.js"></script>
     <script src="pub/js/angular.min.js"></script>
+
+    <script src="pub/js/app.js"></script>
 
 </body>
 </html>
