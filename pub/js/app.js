@@ -1,5 +1,5 @@
 
-var owApp = angular.module('owApp', []);
+var owApp = angular.module('owApp', ['ngRoute']);
 
 owApp.controller('UserCtrl', function($scope) {
 	$scope.users = [
