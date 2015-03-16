@@ -1,18 +1,45 @@
 
-var owApp = angular.module('owApp', ['ngRoute']);
+var owApp = angular.module('owApp', ['ui.router']);
 
-owApp.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider
-  .when('/main', {
+
+
+owApp.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider
+  .state('welcome', {
+    url: '/welcome',
+    templateUrl: 'welcome.html',
+    data: {
+      requireLogin: false
+    }
+  })
+  .state('app', {
+    //url: '/app',
+    abstract: true,
+    templateUrl: 'app.html',
+    data: {
+      requireLogin: true
+    }
+  })
+  .state('app.main', {
+    url: '/main',
     controller: 'MainCtrl',
     templateUrl: 'main.html'
   })
-  .when('/settings', {
+  .state('app.settings', {
+    url: '/settings',
     controller: 'SettingsCtrl',
     templateUrl: 'settings.html'
-  })
-  .otherwise({ redirectTo: '/' });
+  });
 }]);
+
+
+
+owApp.run(['$rootScope', function ($rootScope) {
+  console.log("AAAAAAAAAAAAAA");
+  console.log($rootScope);
+}]);
+
+
 
 owApp.controller('MainCtrl', ['$scope', function ($scope) {
   $scope.content = 'aaaaaaaaaaaaaaaaaaaa';

@@ -72,8 +72,12 @@
       </div>
 
         <!-- Example row of columns -->
-        <div ng-view>
+        <div ui-view>
         </div>
+        <a ui-sref="welcome">Welcome</a>
+        <a ui-sref="app">App</a>
+        <a ui-sref="app.main">Main</a>
+        <a ui-sref="app.settings">Settings</a>
 
       <hr>
 
@@ -89,7 +93,8 @@
     <script src="pub/js/jquery.min.js"></script>
     <script src="pub/js/bootstrap.min.js"></script>
     <script src="pub/js/angular.min.js"></script>
-    <script src="pub/js/angular-route.min.js"></script>
+    <!--script src="pub/js/angular-route.min.js"></script-->
+    <script src="pub/js/angular-ui-router.min.js"></script>
 
     <script src="pub/js/app.js"></script>
 
