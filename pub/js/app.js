@@ -3,9 +3,9 @@ var owApp = angular.module('owApp', ['ngRoute']);
 
 owApp.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
-  .when('/body', {
-    controller: 'BodyCtrl',
-    templateUrl: 'root.html'
+  .when('/main', {
+    controller: 'MainCtrl',
+    templateUrl: 'main.html'
   })
   .when('/settings', {
     controller: 'SettingsCtrl',
@@ -14,8 +14,8 @@ owApp.config(['$routeProvider', function ($routeProvider) {
   .otherwise({ redirectTo: '/' });
 }]);
 
-owApp.controller('BodyCtrl', ['$scope', function ($scope) {
-  $scope.content = { value: 'aaaaaaaaaaaaaaaaaaaa' };
+owApp.controller('MainCtrl', ['$scope', function ($scope) {
+  $scope.content = 'aaaaaaaaaaaaaaaaaaaa';
 }]);
 
 owApp.controller('UserCtrl', ['$scope', function ($scope) {
@@ -30,7 +30,8 @@ owApp.controller('UserCtrl', ['$scope', function ($scope) {
 
 owApp.controller('SettingsCtrl', ['$scope', function ($scope) {
   $scope.settings = [
-    { name: 'settingA' },
-    { name: 'settingB' }
+    { name: 'settingC', value: 1337 },
+    { name: 'settingA', value: 315 },
+    { name: 'settingB', value: 666 }
   ];
 }]);

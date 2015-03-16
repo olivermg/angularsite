@@ -1,1 +1,9 @@
 settingssettingssettings
+
+<div class="row">
+    <div class="col-md-4" ng-repeat="setting in settings | orderBy:'name'">
+        {{ setting.name }}: {{ setting.value }}
+    </div>
+</div>
+
+<a href="#/main">main</a>
