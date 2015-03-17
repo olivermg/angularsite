@@ -1,9 +1,9 @@
 
-var owApp = angular.module('owApp', ['ui.router']);
+owApp = angular.module 'owApp', ['ui.router'];
 
 
 
-owApp.config(['$stateProvider', function ($stateProvider) {
+owApp.config(['$stateProvider', ($stateProvider) ->
   $stateProvider
   .state('welcome', {
     url: '/welcome',
@@ -13,7 +13,7 @@ owApp.config(['$stateProvider', function ($stateProvider) {
     }
   })
   .state('app', {
-    //url: '/app',
+    #url: '/app',
     abstract: true,
     templateUrl: 'app.html',
     data: {
@@ -30,22 +30,22 @@ owApp.config(['$stateProvider', function ($stateProvider) {
     controller: 'SettingsCtrl',
     templateUrl: 'settings.html'
   });
-}]);
+]);
 
 
 
-owApp.run(['$rootScope', function ($rootScope) {
+owApp.run(['$rootScope', ($rootScope) ->
   console.log("AAAAAAAAAAAAAA");
   console.log($rootScope);
-}]);
+]);
 
 
 
-owApp.controller('MainCtrl', ['$scope', function ($scope) {
+owApp.controller('MainCtrl', ['$scope', ($scope) ->
   $scope.content = 'aaaaaaaaaaaaaaaaaaaa';
-}]);
+]);
 
-owApp.controller('UserCtrl', ['$scope', function ($scope) {
+owApp.controller('UserCtrl', ['$scope', ($scope) ->
   $scope.users = [
     { name: 'Oliver' },
     { name: 'Hans' },
@@ -53,12 +53,12 @@ owApp.controller('UserCtrl', ['$scope', function ($scope) {
     { name: 'John Doe' },
     { name: 'Otto' }
   ];
-}]);
+]);
 
-owApp.controller('SettingsCtrl', ['$scope', function ($scope) {
+owApp.controller('SettingsCtrl', ['$scope', ($scope) ->
   $scope.settings = [
     { name: 'settingC', value: 1337 },
     { name: 'settingA', value: 315 },
     { name: 'settingB', value: 666 }
   ];
-}]);
+]);
