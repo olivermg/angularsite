@@ -7,7 +7,7 @@ owApp.config(['$stateProvider', ($stateProvider) ->
   $stateProvider
   .state('welcome', {
     url: '/welcome',
-    templateUrl: 'welcome.html',
+    #templateUrl: 'welcome.html',
     data: {
       requireLogin: false
     }
@@ -15,20 +15,20 @@ owApp.config(['$stateProvider', ($stateProvider) ->
   .state('app', {
     #url: '/app',
     abstract: true,
-    templateUrl: 'app.html',
+    #templateUrl: 'app.html',
     data: {
       requireLogin: true
     }
   })
   .state('app.main', {
     url: '/main',
-    controller: 'MainCtrl',
-    templateUrl: 'main.html'
+    controller: 'MainCtrl'
+    #templateUrl: 'main.html'
   })
   .state('app.settings', {
     url: '/settings',
-    controller: 'SettingsCtrl',
-    templateUrl: 'settings.html'
+    controller: 'SettingsCtrl'
+    #templateUrl: 'settings.html'
   });
 ]);
 
