@@ -6,7 +6,7 @@ owApp = angular.module 'owApp', ['ui.router'];
 owApp.config(['$stateProvider', ($stateProvider) ->
   $stateProvider
   .state('welcome', {
-    url: '/welcome',
+    templateUrl: '/welcome',
     #templateUrl: 'welcome.html',
     data: {
       requireLogin: false

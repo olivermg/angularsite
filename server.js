@@ -1,23 +1,41 @@
 var express = require('express');
+
+var appRouter = express.Router();
+var staticRouter = express.static(__dirname + '/pub');
+
 var app = express();
 
-app.get('/', function(req, res) {
-	res.render('index.jade');
+
+appRouter.get('/:action', function(req, res) {
+	var action = req.params.action;
+	console.log(action);
+	if ( action === '' || action === '/' ) {
+		action = 'index';
+	}
+	res.render(action + '.jade');
 });
-app.get('/welcome', function(req, res) {
+/*
+appRouter.get('/welcome', function(req, res) {
 	res.render('welcome.jade');
 });
-app.get('/app', function(req, res) {
+appRouter.get('/app', function(req, res) {
 	res.render('app.jade');
 });
-app.get('/main', function(req, res) {
+appRouter.get('/main', function(req, res) {
 	res.render('main.jade');
 });
-app.get('/settings', function(req, res) {
+appRouter.get('/settings', function(req, res) {
 	res.render('settings.jade');
 });
+*/
 
-var server = app.listen(8081, function() {
-	console.log("listening...");
+
+app.use('/pub', staticRouter);
+app.use('/', appRouter);
+
+
+var port = 8081;
+var server = app.listen(port, function() {
+	console.log("listening on " + port + "...");
 });
 
