@@ -1,7 +1,8 @@
-doctype 5
+doctype html
+
 html(lang="en" ng-app="owApp")
   head
-    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8)
+    meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
@@ -41,7 +42,8 @@ html(lang="en" ng-app="owApp")
       div(class="row" ng-controller="UserCtrl")
         div(class="col-md-4")
           label(for="searchName") Name:
-          input(id="searchName" type="text" ng-model="searchName") {{ searchName }}
+          input(id="searchName" type="text" ng-model="searchName")
+          {{ searchName }}
         div(class="col-md-8")
           ul
             li(ng-repeat="user in users | filter:searchName") {{ user.name }}
