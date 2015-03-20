@@ -8,10 +8,6 @@ var app = express();
 
 appRouter.get('/:action', function(req, res) {
 	var action = req.params.action;
-	console.log(action);
-	if ( action === '' || action === '/' ) {
-		action = 'index';
-	}
 	res.render(action + '.jade');
 });
 /*
@@ -32,6 +28,9 @@ appRouter.get('/settings', function(req, res) {
 
 app.use('/pub', staticRouter);
 app.use('/', appRouter);
+app.get('/', function(req, res) {
+	res.redirect(301, '/index');
+});
 
 
 var port = 8081;
