@@ -6,29 +6,30 @@ owApp = angular.module 'owApp', ['ui.router'];
 owApp.config(['$stateProvider', ($stateProvider) ->
   $stateProvider
   .state('welcome', {
-    url: '/welcome',
-    #templateUrl: 'welcome.html',
+    url: '',
+    templateUrl: '/welcome',
     data: {
       requireLogin: false
     }
   })
   .state('app', {
-    #url: '/app',
+    #url: '',
     abstract: true,
-    #templateUrl: 'app.html',
+    #templateUrl: '/app',
+    template: '<ui-view/>',
     data: {
       requireLogin: true
     }
   })
   .state('app.main', {
-    url: '/main',
+    url: '',
     controller: 'MainCtrl'
-    #templateUrl: 'main.html'
+    templateUrl: '/main'
   })
   .state('app.settings', {
-    url: '/settings',
+    url: '',
     controller: 'SettingsCtrl'
-    #templateUrl: 'settings.html'
+    templateUrl: '/settings'
   });
 ]);
 
