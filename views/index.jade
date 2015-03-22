@@ -50,12 +50,32 @@ html(lang="en" ng-app="owApp")
   
       div(ui-view)
       a(ui-sref="welcome") Welcome
+      br
+      a(ui-sref="login") Login
+      br
       a(ui-sref="app") App
+      br
       a(ui-sref="app.main") Main
+      br
       a(ui-sref="app.settings") Settings
+
       hr
       footer
         p © Company 2014
+
+      button(type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal") Launch demo modal
+
+      div(class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+        div(class="modal-dialog")
+          div(class="modal-content")
+            div(class="modal-header")
+              button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                span(aria-hidden="true") &times;
+              h4(class="modal-title" id="myModalLabel") Modal title
+            div(class="modal-body") ...
+            div(class="modal-footer")
+              button(type="button" class="btn btn-default" data-dismiss="modal") Close
+              button(type="button" class="btn btn-primary") Save changes
   
     script(src="pub/js/jquery.min.js")
     script(src="pub/js/bootstrap.min.js")
