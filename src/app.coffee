@@ -1,5 +1,5 @@
 
-owApp = angular.module 'owApp', ['ui.router']
+owApp = angular.module 'owApp', ['ui.bootstrap', 'ui.router']
 
 
 
@@ -12,10 +12,18 @@ owApp.config(['$stateProvider', ($stateProvider) ->
       requireLogin: false
     }
   })
-  .state('login', {
+  .state('loginModal', {
     url: '#',
-    controller: 'LoginCtrl',
+    controller: 'LoginModalCtrl',
     templateUrl: '/loginModal'
+    data: {
+      requireLogin: false
+    }
+  })
+  .state('verifyLogin', {
+    #url: '#',
+    controller: 'VerifyLoginCtrl',
+    #templateUrl: '/verifyLogin',
     data: {
       requireLogin: false
     }
@@ -54,18 +62,27 @@ owApp.run(['$rootScope', ($rootScope) ->
 
 
 
+owApp.service('LoginService', [() ->
+	login = (user, pass) ->
+		console.log('trying to log in with ' + user + ':' + pass)
+		return true
+])
+
+
+
 owApp.controller('MainCtrl', ['$scope', ($scope) ->
   $scope.content = 'aaaaaaaaaaaaaaaaaaaa'
 ])
 
 owApp.controller('UserCtrl', ['$scope', ($scope) ->
-  $scope.users = [
-    { name: 'Oliver' },
-    { name: 'Hans' },
-    { name: 'Foo' },
-    { name: 'John Doe' },
-    { name: 'Otto' }
-  ]
+	$scope.users = [
+		{ name: 'Oliver' },
+		{ name: 'Hans' },
+		{ name: 'Foo' },
+		{ name: 'John Doe' },
+		{ name: 'Otto' }
+	]
+
 ])
 
 owApp.controller('SettingsCtrl', ['$scope', ($scope) ->
@@ -76,8 +93,34 @@ owApp.controller('SettingsCtrl', ['$scope', ($scope) ->
   ]
 ])
 
-owApp.controller('LoginCtrl', ['$scope', '$rootScope', ($scope, $rootScope) ->
-	$('#loginModal').modal('show')
-	$rootScope.currentUser = 'oliver'
+owApp.controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', ($scope, $rootScope, $modal) ->
+	$scope.open = () ->
+		console.log("OPEN")
+		modalInstance = $modal.open({
+			templateUrl: '/loginModal',
+			controller: 'ModalInstanceCtrl'
+		})
+
+		modalInstance.result.then(
+			(result) ->
+				console.log('OK')
+				console.log(result)
+				$rootScope.currentUser = 'oliver'
+			(result) ->
+				console.log('CANCEL')
+				console.log(result))
+])
+
+owApp.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', ($scope, $modalInstance) ->
+	$scope.ok = () ->
+		$modalInstance.close('=> ok')
+
+	$scope.cancel = () ->
+		$modalInstance.dismiss('=> cancel')
+])
+
+owApp.controller('VerifyLoginCtrl', ['$rootScope', 'LoginService', ($rootScope, loginService) ->
+	if loginService.login('oliver')
+		$rootScope.currentUser = 'oliver'
 ])
 
