@@ -1,25 +1,33 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 
-var appRouter = express.Router();
 var staticRouter = express.static(__dirname + '/pub');
 
-var app = express();
-
-
+var appRouter = express.Router();
 appRouter.get('/:action', function(req, res) {
 	var action = req.params.action;
 	res.render(action + '.jade');
 });
 
+var apiRouter = express.Router();
+apiRouter.post('/:action', function(req, res) {
+	var action = req.params.action;
+	var module = require('./app/' + action + '.js');
+	module.post(req, res);
+});
 
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/pub', staticRouter);
+app.use('/api', apiRouter)
 app.use('/', appRouter);
 app.get('/', function(req, res) {
 	res.render('index.jade');
 });
 
 
-var port = 8081;
+var port = process.env.PORT || 8081;
 var server = app.listen(port, function() {
 	console.log("listening on " + port + "...");
 });

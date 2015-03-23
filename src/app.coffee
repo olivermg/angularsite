@@ -62,10 +62,27 @@ owApp.run(['$rootScope', ($rootScope) ->
 
 
 
-owApp.service('LoginService', [() ->
-	login = (user, pass) ->
-		console.log('trying to log in with ' + user + ':' + pass)
-		return true
+owApp.service('LoginService', ['$http', ($http) ->
+	this.login = (user, pass) ->
+		promise = $http.post('/api/verifyLogin', { user: user, pass: pass })
+			.then(
+				(resp) ->
+					console.log('http success:')
+					console.log(resp)
+					if resp.data.success is true
+						console.log('login successful!')
+						return { loggedIn: true }
+					else
+						console.log('login failed!')
+						return { loggedIn: false }
+				(err) ->
+					console.log('http error:')
+					console.log(err)
+					return { loggedIn: false }
+			)
+		return promise
+
+	return this
 ])
 
 
@@ -93,7 +110,7 @@ owApp.controller('SettingsCtrl', ['$scope', ($scope) ->
   ]
 ])
 
-owApp.controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', ($scope, $rootScope, $modal) ->
+owApp.controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', 'LoginService', ($scope, $rootScope, $modal, loginService) ->
 	$scope.open = () ->
 		console.log("OPEN")
 		modalInstance = $modal.open({
@@ -105,6 +122,9 @@ owApp.controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', ($scope, $
 			(result) ->
 				console.log('OK')
 				console.log(result)
+				loginService.login(result).then((r) ->
+					console.log('loginService returned:')
+					console.log(r))
 				$rootScope.currentUser = 'oliver'
 			(result) ->
 				console.log('CANCEL')

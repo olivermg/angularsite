@@ -8,9 +8,18 @@ module.exports = function(grunt) {
         options: {
           sourceMap: true
         },
-        files: {
-          'pub/js/app.js': ['src/*.coffee']
-        }
+        files: [
+          {
+            'pub/js/app.js': ['src/*.coffee']
+          },
+	  {
+	    expand: true,
+            cwd: 'app/',
+            src: ['**/*.coffee'],
+            dest: 'app/',
+            ext: '.js'
+	  }
+	]
       }
     },
 
@@ -22,10 +31,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
+  /*
   grunt.registerTask('dummy', 'log some stuff', function() {
     grunt.log.write('logging some stuff').ok();
     grunt.log.write(grunt.config.get('pkg').name).ok();
   });
+  */
 
   grunt.registerTask('build-release', 'build everything for release', ['coffee', 'uglify']);
   grunt.registerTask('build-debug', 'build everything for debug', ['coffee']);
