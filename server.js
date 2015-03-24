@@ -15,6 +15,11 @@ apiRouter.post('/:action', function(req, res) {
 	var module = require('./app/' + action + '.js');
 	module.post(req, res);
 });
+apiRouter.get('/:action', function(req, res) {
+	var action = req.params.action;
+	var module = require('./app/' + action + '.js');
+	module.get(req, res);
+});
 
 var app = express();
 app.use(bodyParser.json());
