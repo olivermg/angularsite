@@ -9,4 +9,6 @@ pub/js/app.js
 pub/js/app.js.map
 app/*.js
 app/*.map
+app/models/*.js
+app/models/*.map
 
