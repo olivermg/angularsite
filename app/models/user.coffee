@@ -1,7 +1,14 @@
 mongoose = require 'mongoose'
 
-module.exports = mongoose.model 'user', {
+schema = mongoose.Schema {
 	email: String,
 	password: String
+}
+
+model = mongoose.model 'User', schema
+
+module.exports = {
+	schema: schema,
+	model: model
 }
 

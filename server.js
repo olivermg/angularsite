@@ -7,10 +7,9 @@ var dbConfig = require('./app/db.js');
 
 
 // connect to db:
-db = mongoose.createConnection();
-db.open(dbConfig.url, { server: { auto_reconnect: true } }, function(err) {
-	console.log("ERROR(DB): " + err);
-});
+db = mongoose.connection;
+db.on('error', console.error);
+mongoose.connect(dbConfig.url);
 
 
 // router for static content:
