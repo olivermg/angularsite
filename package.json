@@ -13,6 +13,7 @@
     "url": ""
   },
   "dependencies": {
+    "bcrypt": "~0.8.1",
     "body-parser": "~1.12.2",
     "express": "~4.12.3",
     "express-session": "~1.10.4",
