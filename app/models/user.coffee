@@ -3,12 +3,16 @@ bcrypt = require 'bcrypt'
 
 bcryptDifficulty = 10
 
-bcryptIt = (pw) ->
-	return bcrypt.hashSync(pw, bcryptDifficulty)
-
 schema = mongoose.Schema {
-	email: String,
-	password: { type: String, set: bcryptIt }
+	email: {
+		type: String,
+		set: (v) -> return v.toLowerCase(),
+		index: { unique: true }
+	},
+	password: {
+		type: String,
+		set: (pw) -> return bcrypt.hashSync pw, bcryptDifficulty
+	}
 }
 
 model = mongoose.model 'User', schema
