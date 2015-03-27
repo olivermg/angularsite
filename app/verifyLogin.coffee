@@ -11,6 +11,7 @@ module.exports = {
 		User.model.find { }, (err, usr) ->
 			console.log err
 			console.log usr
-		response.json { dbName: db.name, success: true }
+			newUser = new User.model { email: 'fffffffff', password: 'ooo' }
+			response.json { dbName: db.name, user: usr[0], newUser: newUser, success: true }
 }
 
